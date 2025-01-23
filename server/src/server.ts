@@ -3,8 +3,19 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const PORT = process.env.PORT || 3000;
+class Server {
+  private port: number;
+  
+  constructor() {
+    this.port = parseInt(process.env.PORT || '3000');
+  }
 
-app.listen(PORT, () => {
-  console.log(`The server is running on the port ${PORT} 🚀`);
-});
+  public start(): void {
+    app.listen(this.port, () => {
+      console.log(`Server listening on port ${this.port}`);
+    });
+  }
+}
+
+const server = new Server();
+server.start();
