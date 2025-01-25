@@ -9,8 +9,12 @@ class AuthRoute {
   }
 
   private initializeRoutes() {
-    this.router.post('/login', AuthController.login);
     this.router.post('/register', AuthController.register);
+    this.router.post('/login', AuthController.login);
+    this.router.post('/logout', AuthController.logout);
+    this.router.get('/success', AuthController.success);
+    this.router.get('/failure', AuthController.failure);
+
   }
 }
 

@@ -1,7 +1,10 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
+import session from 'express-session';
+import passport from './config/passport';
 
 import MainRoute from './routes/mainRoute';
+import exp from 'constants';
 
 class App {
   public app: Application;
@@ -16,6 +19,19 @@ class App {
   private initializeMiddlewares() {
     this.app.use(express.json());
     this.app.use(cors());
+    this.app.use(express.urlencoded({ extended: true }));
+
+    this.app.use(
+      session({
+        secret: process.env.YOUR_SECRET_KEY || 'secret',
+        resave: false,
+        saveUninitialized: false,
+        // cookie: { secure: false }
+      })
+    );
+
+    this.app.use(passport.initialize()); 
+    this.app.use(passport.session());
   }
 
   private initializeRoutes() {
