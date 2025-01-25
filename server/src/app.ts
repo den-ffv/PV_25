@@ -1,4 +1,7 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
+import cors from 'cors';
+
+import MainRoute from './routes/mainRoute';
 
 class App {
   public app: Application;
@@ -12,12 +15,16 @@ class App {
 
   private initializeMiddlewares() {
     this.app.use(express.json());
+    this.app.use(cors());
   }
+
   private initializeRoutes() {
     this.app.get('/', this.homeRouteHandler);
+    this.app.use('/api', MainRoute);
   }
+
   private homeRouteHandler(req: Request, res: Response, next: NextFunction): void {
-    res.send('Hi from TypeScript + Express!');
+    res.send('TypeScript + Express! 🚀');
   }
 
   private initializeErrorHandling(): void {
