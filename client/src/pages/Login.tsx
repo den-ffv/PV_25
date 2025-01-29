@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Input } from "@chakra-ui/react"
+import { Button, HStack } from "@chakra-ui/react"
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -12,30 +14,16 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="login-container">
-      <h2>Login</h2>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center',  width: 500, margin: '0 auto', padding: 50, border: '1px solid #ccc', borderRadius: 10 }}>
+      <h2 style={{marginBottom: 30}}>Login</h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+        <div style={{ marginBottom: 10 }}>
+          <Input placeholder="Email" width={400} />
         </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+        <div style={{ marginBottom: 10 }}>
+          <Input placeholder="Password" />
         </div>
-        <button type="submit">Login</button>
+        <Button size="sm">Login</Button>
       </form>
     </div>
   );
