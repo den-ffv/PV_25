@@ -2,15 +2,15 @@ import { Request, Response } from "express";
 
 import prisma from "../utils/prisma";
 
-class UserController {
+class RoleController {
   public async getList (req: Request, res: Response): Promise<any> {
     try {
-      const users = await prisma.user.findMany();
+      const roles = await prisma.role.findMany();
       
-      if (!users) {
+      if (!roles) {
         return res.status(404).json({ message: "NO_FOUND" });
       }
-      return res.status(200).json(users);
+      return res.status(200).json(roles);
     } catch (error: any) {
       console.error("Error get all: ", error.message);
     }
@@ -19,16 +19,16 @@ class UserController {
     try {
       const { id } = req.params;
 
-      const user = await prisma.user.findUnique({
+      const role = await prisma.role.findUnique({
         where: {
           id: parseInt(id)
         }
       });
 
-      if (!user) {
+      if (!role) {
         return res.status(404).json({ message: "NO_FOUND" });
       }
-      return res.status(200).json(user);
+      return res.status(200).json(role);
     } catch (error: any) {
       console.error("Error get: ", error.message );
     }
@@ -37,9 +37,9 @@ class UserController {
     try {
       const data = req.body;
 
-      const user = await prisma.user.create({ data });
+      const role = await prisma.role.create({ data });
       
-      return res.status(201).json(user);
+      return res.status(201).json(role);
     } catch (error: any) {
       console.error("Error create: ", error.message );
     }
@@ -49,13 +49,13 @@ class UserController {
       const { id } = req.params;
       const data = req.body;
 
-      const user = await prisma.user.update({ where: { id: parseInt(id) }, data });
+      const role = await prisma.role.update({ where: { id: parseInt(id) }, data });
 
-      if (!user) {
+      if (!role) {
         return res.status(404).json({ message: "NO_FOUND" });
       }
 
-      return res.status(200).json(user);
+      return res.status(200).json(role);
     } catch (error: any) {
       console.error("Error update: ", error.message );
     }
@@ -64,7 +64,7 @@ class UserController {
     try {
       const { id } = req.params;
 
-      await prisma.user.delete({ where: { id: parseInt(id) } });
+      await prisma.role.delete({ where: { id: parseInt(id) } });
       return res.status(204).json({ message: "SUCCESSFULLY_DELETED" });
     } catch (error: any) {
       console.error("Error delete: ", error.message );
@@ -72,4 +72,4 @@ class UserController {
   }
 }
 
-export default new UserController();
+export default new RoleController();

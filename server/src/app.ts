@@ -4,7 +4,6 @@ import session from 'express-session';
 import passport from './config/passport';
 
 import MainRoute from './routes/mainRoute';
-import exp from 'constants';
 
 class App {
   public app: Application;
